@@ -45,8 +45,8 @@ list_of_files = [
     f"src/{project_name}/exception.py",
 
     "config/config.yaml",
-    "params.yaml",
-    "schema.yaml",
+    "config/params.yaml",
+    "config/schema.yaml",
 
     "notebook/.gitkeep",
     "research/.gitkeep",
