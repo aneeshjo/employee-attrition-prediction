@@ -10,7 +10,8 @@ from employee_attrition.utils.common import (
 )
 
 from employee_attrition.entity.config_entity import(
-    DataIngestionConfig
+    DataIngestionConfig,
+    DataValidationConfig
 )
 from pathlib import Path
 
@@ -48,3 +49,21 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+    
+    def get_data_validation_config(self) -> DataValidationConfig:
+
+        config = self.config.data_validation
+
+        schema = self.schema.COLUMNS
+
+        create_directories([Path(config.root_dir)])
+
+        data_validation_config = DataValidationConfig(
+            root_dir=Path(config.root_dir),
+            train_data_path=Path(config.train_data_path),
+            test_data_path=Path(config.test_data_path),
+            validation_status=Path(config.validation_status),
+            all_schema=schema
+        )
+
+        return data_validation_config

@@ -13,3 +13,19 @@ class DataIngestionConfig:
     test_data_path: Path
     test_size: float
     random_state: int
+
+@dataclass(frozen=True)
+class DataValidationConfig:
+    """
+    Configuration for Data Validation.
+    """
+
+    root_dir: Path
+
+    train_data_path: Path
+
+    test_data_path: Path
+
+    validation_status: Path
+
+    all_schema: dict
