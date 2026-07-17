@@ -12,7 +12,8 @@ from employee_attrition.utils.common import (
 from employee_attrition.entity.config_entity import(
     DataIngestionConfig,
     DataValidationConfig,
-    DataTransformationConfig
+    DataTransformationConfig,
+    ModelTrainerConfig
 )
 from pathlib import Path
 
@@ -92,3 +93,32 @@ class ConfigurationManager:
         )
 
         return data_transformation_config
+
+    def get_model_trainer_config(self)->ModelTrainerConfig:
+
+        config = self.config.model_trainer
+
+        params = self.params.model_trainer
+
+        create_directories([config.root_dir])
+
+        return ModelTrainerConfig(
+
+            root_dir=Path(config.root_dir),
+
+            trained_model_file_path=Path(config.trained_model_file_path),
+
+            metrics_file_name=Path(config.metrics_file_name),
+
+            C=params.C,
+
+            kernel=params.kernel,
+
+            gamma=params.gamma,
+
+            class_weight=params.class_weight,
+
+            probability=params.probability,
+
+            random_state=params.random_state
+        )

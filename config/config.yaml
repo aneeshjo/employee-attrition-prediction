@@ -27,3 +27,10 @@ data_transformation:
   test_data_path: artifacts/data_ingestion/test.csv
 
   preprocessor_obj_file_path: artifacts/data_transformation/preprocessor.pkl
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+
+  trained_model_file_path: artifacts/model_trainer/model.pkl
+
+  metrics_file_name: artifacts/model_trainer/metrics.json

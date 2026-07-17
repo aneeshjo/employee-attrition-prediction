@@ -3,3 +3,11 @@ data_ingestion:
   random_state: 42
 
 TARGET_COLUMN: Attrition
+
+model_trainer:
+  C: 10
+  kernel: linear
+  gamma: scale
+  class_weight: balanced
+  probability: True
+  random_state: 42

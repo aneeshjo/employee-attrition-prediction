@@ -42,3 +42,24 @@ class DataTransformationConfig:
     preprocessor_obj_file_path: Path
 
     target_column:str
+
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+
+    root_dir: Path
+
+    trained_model_file_path: Path
+
+    metrics_file_name: Path
+
+    C: float
+
+    kernel: str
+
+    gamma: str
+
+    class_weight: str
+
+    probability: bool
+
+    random_state: int
