@@ -1,17 +1,19 @@
-from employee_attrition.config.configuration import ConfigurationManager
+import sys
+
 from employee_attrition.components.data_transformation import DataTransformation
+from employee_attrition.config.configuration import ConfigurationManager
+from employee_attrition.exception import CustomException
 from employee_attrition.logger import logger
 
 
-STAGE_NAME = "Data Transformation Stage"
+STAGE_NAME = "DATA TRANSFORMATION STAGE"
 
 
-class DataTransformationTrainingPipeline:
+if __name__ == "__main__":
 
-    def __init__(self):
-        pass
+    try:
 
-    def main(self):
+        logger.info(f">>>>>> {STAGE_NAME} STARTED <<<<<<")
 
         config = ConfigurationManager()
 
@@ -27,25 +29,24 @@ class DataTransformationTrainingPipeline:
             data_transformation.initiate_data_transformation()
         )
 
-        logger.info(f"Train Array Shape: {train_arr.shape}")
-        logger.info(f"Test Array Shape: {test_arr.shape}")
-        logger.info(f"Preprocessor saved at: {preprocessor_path}")
+        logger.info(
+            f"Train Array Shape : {train_arr.shape}"
+        )
 
+        logger.info(
+            f"Test Array Shape : {test_arr.shape}"
+        )
 
-if __name__ == "__main__":
+        logger.info(
+            f"Preprocessor Saved At : {preprocessor_path}"
+        )
 
-    try:
-
-        logger.info(f">>>>>> Stage {STAGE_NAME} started <<<<<<")
-
-        obj = DataTransformationTrainingPipeline()
-
-        obj.main()
-
-        logger.info(f">>>>>> Stage {STAGE_NAME} completed <<<<<<")
+        logger.info(
+            f">>>>>> {STAGE_NAME} COMPLETED <<<<<<\n"
+        )
 
     except Exception as e:
 
         logger.exception(e)
 
-        raise e
+        raise CustomException(e, sys)

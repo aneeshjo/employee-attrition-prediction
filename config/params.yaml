@@ -2,12 +2,19 @@ data_ingestion:
   test_size: 0.20
   random_state: 42
 
-TARGET_COLUMN: Attrition
+target_column: Attrition
 
 model_trainer:
+  model_name: svm
+
   C: 10
+
   kernel: linear
+
   gamma: scale
+
   class_weight: balanced
-  probability: True
+
+  probability: true
+
   random_state: 42

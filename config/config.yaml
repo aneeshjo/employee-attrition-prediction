@@ -3,7 +3,7 @@ artifacts_root: artifacts
 data_ingestion:
   root_dir: artifacts/data_ingestion
 
-  source_URL: dataset/employee_attrition.csv
+  source_file: dataset/employee_attrition.csv
 
   local_data_file: artifacts/data_ingestion/employee_attrition.csv
 
@@ -18,7 +18,10 @@ data_validation:
 
   test_data_path: artifacts/data_ingestion/test.csv
 
+  schema_file_path: schema.yaml
+
   validation_status: artifacts/data_validation/status.txt
+
 data_transformation:
   root_dir: artifacts/data_transformation
 
@@ -26,11 +29,16 @@ data_transformation:
 
   test_data_path: artifacts/data_ingestion/test.csv
 
-  preprocessor_obj_file_path: artifacts/data_transformation/preprocessor.pkl
+  preprocessor_path: artifacts/data_transformation/preprocessor.pkl
 
 model_trainer:
   root_dir: artifacts/model_trainer
 
-  trained_model_file_path: artifacts/model_trainer/model.pkl
+  model_path: artifacts/model_trainer/model.pkl
 
-  metrics_file_name: artifacts/model_trainer/metrics.json
+  metrics_file_path: artifacts/model_trainer/metrics.json
+
+prediction:
+  model_path: artifacts/model_trainer/model.pkl
+
+  preprocessor_path: artifacts/data_transformation/preprocessor.pkl

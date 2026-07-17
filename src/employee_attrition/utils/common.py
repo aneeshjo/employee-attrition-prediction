@@ -1,73 +1,96 @@
+import sys
 from pathlib import Path
-from typing import Any
 
-import yaml
 import joblib
+import yaml
 from box import ConfigBox
 from ensure import ensure_annotations
 
-from employee_attrition.logger import logger
 from employee_attrition.exception import CustomException
-import sys
+from employee_attrition.logger import logger
 
 
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
     """
     Reads a YAML file and returns it as a ConfigBox.
-
-    Args:
-        path_to_yaml (Path): Path to the YAML file.
-
-    Returns:
-        ConfigBox: YAML content accessible using dot notation.
     """
 
     try:
-        with open(path_to_yaml) as yaml_file:
+
+        with open(path_to_yaml, "r", encoding="utf-8") as yaml_file:
+
             content = yaml.safe_load(yaml_file)
 
-        logger.info(f"YAML file loaded successfully: {path_to_yaml}")
+        logger.info(f"Loaded YAML file: {path_to_yaml}")
 
         return ConfigBox(content)
 
     except Exception as e:
-        logger.exception("Failed to read YAML file.")
+
+        logger.exception(f"Failed to read YAML file: {path_to_yaml}")
+
         raise CustomException(e, sys)
-    
+
 
 def create_directories(
     paths: list[Path],
-    verbose: bool = True,
+    verbose: bool = True
 ) -> None:
     """
-    Create multiple directories.
-
-    Args:
-        paths (list[Path]): List of directories.
-        verbose (bool): Log directory creation.
+    Creates directories if they do not already exist.
     """
 
     for path in paths:
-        path.mkdir(parents=True, exist_ok=True)
+
+        path.mkdir(
+            parents=True,
+            exist_ok=True
+        )
 
         if verbose:
             logger.info(f"Created directory: {path}")
 
-def save_object(file_path,obj):
 
-    Path(file_path).parent.mkdir(
-        parents=True,
-        exist_ok=True
-    )
-
-    joblib.dump(obj,file_path)
-
-def load_object(file_path):
-
+def save_object(
+    file_path: Path,
+    obj: object
+) -> None:
     """
-    Loads a saved Joblib object.
+    Saves a Python object using Joblib.
     """
 
-    return joblib.load(file_path)
+    try:
 
+        file_path.parent.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        joblib.dump(obj, file_path)
+
+        logger.info(f"Saved object: {file_path}")
+
+    except Exception as e:
+
+        raise CustomException(e, sys)
+
+
+def load_object(
+    file_path: Path
+):
+    """
+    Loads a Joblib object.
+    """
+
+    try:
+
+        obj = joblib.load(file_path)
+
+        logger.info(f"Loaded object: {file_path}")
+
+        return obj
+
+    except Exception as e:
+
+        raise CustomException(e, sys)

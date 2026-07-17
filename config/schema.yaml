@@ -1,4 +1,6 @@
-COLUMNS:
+columns_count: 35
+
+columns:
   Age: int64
   Attrition: object
   BusinessTravel: object
@@ -34,3 +36,7 @@ COLUMNS:
   YearsInCurrentRole: int64
   YearsSinceLastPromotion: int64
   YearsWithCurrManager: int64
+
+target_values:
+  - Yes
+  - No
