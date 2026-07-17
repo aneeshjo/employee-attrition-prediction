@@ -29,3 +29,16 @@ class DataValidationConfig:
     validation_status: Path
 
     all_schema: dict
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+
+    root_dir: Path
+
+    train_data_path: Path
+
+    test_data_path: Path
+
+    preprocessor_obj_file_path: Path
+
+    target_column:str

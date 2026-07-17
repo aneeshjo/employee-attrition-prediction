@@ -1,3 +1,5 @@
 data_ingestion:
   test_size: 0.20
   random_state: 42
+
+TARGET_COLUMN: Attrition

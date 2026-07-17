@@ -11,7 +11,8 @@ from employee_attrition.utils.common import (
 
 from employee_attrition.entity.config_entity import(
     DataIngestionConfig,
-    DataValidationConfig
+    DataValidationConfig,
+    DataTransformationConfig
 )
 from pathlib import Path
 
@@ -67,3 +68,27 @@ class ConfigurationManager:
         )
 
         return data_validation_config
+    
+    def get_data_transformation_config(self)-> DataTransformationConfig:
+
+        config = self.config.data_transformation
+        params=self.params.TARGET_COLUMN
+
+        create_directories([config.root_dir])
+
+        data_transformation_config= DataTransformationConfig(
+
+            root_dir=Path(config.root_dir),
+
+            train_data_path=Path(config.train_data_path),
+
+            test_data_path=Path(config.test_data_path),
+
+            preprocessor_obj_file_path=Path(
+                config.preprocessor_obj_file_path
+            )
+
+            target_column=params.TARGET_COLUMN
+        )
+
+        return data_transformation_config

@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+import joblib
 from box import ConfigBox
 from ensure import ensure_annotations
 
@@ -52,3 +53,21 @@ def create_directories(
 
         if verbose:
             logger.info(f"Created directory: {path}")
+
+def save_object(file_path,obj):
+
+    Path(file_path).parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    joblib.dump(obj,file_path)
+
+def load_object(file_path):
+
+    """
+    Loads a saved Joblib object.
+    """
+
+    return joblib.load(file_path)
+
