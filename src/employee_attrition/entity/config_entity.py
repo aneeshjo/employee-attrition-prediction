@@ -54,9 +54,15 @@ class ModelTrainerConfig:
 
 @dataclass(frozen=True)
 class PredictionConfig:
-    """
-    Configuration for the Prediction Pipeline.
-    """
 
+    # Local fallback (optional)
     model_path: Path
     preprocessor_path: Path
+    metrics_file_path: Path
+
+    # Hugging Face
+    repo_id: str
+
+    model_filename: str
+    preprocessor_filename: str
+    metrics_filename: str

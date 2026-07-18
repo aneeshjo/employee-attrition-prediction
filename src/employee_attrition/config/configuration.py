@@ -147,12 +147,21 @@ class ConfigurationManager:
 
     def get_prediction_config(self) -> PredictionConfig:
 
-        config = self.config.prediction
+        model_trainer_config = self.config.model_trainer
+        data_transformation_config = self.config.data_transformation
+        prediction_config = self.config.prediction
+        huggingface_config = self.config.huggingface
 
         return PredictionConfig(
 
-            model_path=Path(config.model_path),
+            # Local paths
+            model_path=Path(model_trainer_config.model_path),
+            preprocessor_path=Path(data_transformation_config.preprocessor_path),
+            metrics_file_path=Path(model_trainer_config.metrics_file_path),
 
-            preprocessor_path=Path(config.preprocessor_path)
-
+            # Hugging Face
+            repo_id=huggingface_config.repo_id,
+            model_filename=prediction_config.model_filename,
+            preprocessor_filename=prediction_config.preprocessor_filename,
+            metrics_filename=prediction_config.metrics_filename,
         )

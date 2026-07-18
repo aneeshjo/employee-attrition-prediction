@@ -38,7 +38,10 @@ model_trainer:
 
   metrics_file_path: artifacts/model_trainer/metrics.json
 
-prediction:
-  model_path: artifacts/model_trainer/model.pkl
+huggingface:
+  repo_id: "aneeshjose/employee-attrition-model"
 
-  preprocessor_path: artifacts/data_transformation/preprocessor.pkl
+prediction:
+  model_filename: "model.pkl"
+  preprocessor_filename: "preprocessor.pkl"
+  metrics_filename: "metrics.json"

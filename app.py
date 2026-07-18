@@ -1,4 +1,5 @@
 import json
+from huggingface_hub import hf_hub_download
 import streamlit as st
 
 from employee_attrition.config.configuration import ConfigurationManager
@@ -33,18 +34,15 @@ predictor = PredictionPipeline(
 # LOAD MODEL METRICS
 # ==========================================================
 
-try:
-    with open(
-        prediction_config.metrics_file_path,
-        "r",
-        encoding="utf-8"
-    ) as file:
 
-        metrics = json.load(file)
 
-except Exception:
+metrics_path = hf_hub_download(
+    repo_id=prediction_config.repo_id,
+    filename=prediction_config.metrics_filename
+)
 
-    metrics = None
+with open(metrics_path, "r", encoding="utf-8") as file:
+    metrics = json.load(file)
 
 # ==========================================================
 # CUSTOM CSS

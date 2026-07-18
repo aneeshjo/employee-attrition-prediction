@@ -6,6 +6,7 @@ from employee_attrition.entity.config_entity import PredictionConfig
 from employee_attrition.exception import CustomException
 from employee_attrition.logger import logger
 from employee_attrition.utils.common import load_object
+from employee_attrition.utils.huggingface import hf_hub_download
 
 
 class CustomData:
@@ -145,14 +146,24 @@ class PredictionPipeline:
 
             logger.info("Loading preprocessor...")
 
+            model_path = hf_hub_download(
+                repo_id=self.config.repo_id,
+                filename=self.config.model_filename,
+            )
+
+            preprocessor_path = hf_hub_download(
+                repo_id=self.config.repo_id,
+                filename=self.config.preprocessor_filename,
+            )
+
             preprocessor = load_object(
-                self.config.preprocessor_path
+                preprocessor_path
             )
 
             logger.info("Loading trained model...")
 
             model = load_object(
-                self.config.model_path
+                model_path
             )
 
             logger.info("Transforming input data...")
