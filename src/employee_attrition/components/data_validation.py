@@ -104,10 +104,17 @@ class DataValidation:
 
             for column, expected_dtype in expected_columns.items():
 
-                train_dtype = str(train_df[column].dtype)
-                test_dtype = str(test_df[column].dtype)
+                train_dtype = str(train_df[column].dtype).lower()
+                test_dtype = str(test_df[column].dtype).lower()
+                expected_dtype = str(expected_dtype).lower()
 
-                if train_dtype != expected_dtype:
+                # Treat Pandas "str" and "object" as equivalent
+                if expected_dtype == "object":
+                    valid_types = ["object", "str", "string"]
+                else:
+                    valid_types = [expected_dtype]
+
+                if train_dtype not in valid_types:
 
                     validation_status = False
 
@@ -115,14 +122,13 @@ class DataValidation:
                         f"Train -> {column}: Expected {expected_dtype}, Found {train_dtype}"
                     )
 
-                if test_dtype != expected_dtype:
+                if test_dtype not in valid_types:
 
                     validation_status = False
 
                     report.append(
                         f"Test -> {column}: Expected {expected_dtype}, Found {test_dtype}"
                     )
-
             # ===========================
             # Target Column Validation
             # ===========================

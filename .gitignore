@@ -1,36 +1,37 @@
-# Virtual Environment
-venv/
-env/
-ENV/
-
-# Python cache
+# Python
 __pycache__/
 *.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+
+# Python cache
+.pytest_cache/
+.mypy_cache/
+
+# OS Files
+.DS_Store
+Thumbs.db
 
 # Build
 build/
 dist/
 *.egg-info/
 
-# Logs
-logs/
-
-# Artifacts
-artifacts/
-
-# IDE
-.vscode/
-.idea/
-
-# Environment
-.env
-
-# Notebook
-.ipynb_checkpoints/
-
-# Test cache
-.pytest_cache/
-
-# OS
-.DS_Store
-Thumbs.db
+# Streamlit
+.streamlit/secrets.toml

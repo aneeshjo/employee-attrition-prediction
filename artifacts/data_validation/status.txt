@@ -1,0 +1,10 @@
+==================================================
+DATA VALIDATION REPORT
+==================================================
+
+Validation Status : True
+
+Train Shape : (1176, 35)
+Test Shape : (294, 35)
+Train Duplicate Rows : 0
+Test Duplicate Rows : 0
