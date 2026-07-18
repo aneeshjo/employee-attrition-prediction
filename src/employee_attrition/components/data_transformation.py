@@ -154,6 +154,8 @@ class DataTransformation:
                 f"Test Shape : {test_df.shape}"
             )
 
+            
+
             # ==========================================
             # Split Features and Target
             # ==========================================
@@ -188,6 +190,16 @@ class DataTransformation:
             )
 
             # y_test = test_df[target_column]
+
+            drop_columns = [
+                "EmployeeCount",
+                "EmployeeNumber",
+                "Over18",
+                "StandardHours"
+            ]
+
+            X_train = X_train.drop(columns=drop_columns)
+            X_test = X_test.drop(columns=drop_columns)
 
             # ==========================================
             # Create Preprocessor
